@@ -28,7 +28,15 @@ var loadButtons = function() {
 };
 
 var getLatLon = function (submit) {
-    
+    console.log(submit);
+    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + submit + "&limit=5&appid=11988be7e9227615c1560b01dd5dbd6a"
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+          response.json().then(function(data) {
+            getWeather(data[0].lat, data[0].lon)
+          });
+        };
+    });
 };
 
 var formSubmitHandler = function(event) {
@@ -41,7 +49,7 @@ var formSubmitHandler = function(event) {
     if (cityname) {
     //   getWeather(cityname);
         createButton(cityname);
-        // getLatLon();
+        getLatLon(cityname);
   
       // clear old content
       cityInputEl.value = "";
@@ -58,46 +66,41 @@ var createButton = function (cityObj) {
     cityEl.className = "btn btn-secondary";
     cityEl.innerHTML = cityObj;
 
-
     // going to need to add something here that will specificy what
     // it's going to search for when it's clicked
 
     // append to <div id="history-buttons">
     buttonHolder.appendChild(cityEl);
     buttons.push(cityObj);
-    console.log(buttons);
     saveButtons();
 }
 
-var getWeather = function(user) {
+var getWeather = function(lat, lon) {
     // format the github api url
-    // var lat = ;
-    // var lon = ;
-    // var part = ;
-    // var appid = ;
-
-    // var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat
-    // "&lon=" + lon "&exclude=" + part "&appid=" + appid;
+  
+    var lat = lat;
+    var lon = lon;
+    console.log(lat, lon);
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat
+    "&lon=" + lon + "&&appid=11988be7e9227615c1560b01dd5dbd6a";
   
     // make a get request to url
-    // fetch(apiUrl)
-    //   .then(function(response) {
-    //     console.log(response);
-    //   }
+    fetch(apiUrl)
+      .then(function(response) {
+        // console.log(response);
         // request was successful
-    //     if (response.ok) {
-    //       console.log(response);
-    //       response.json().then(function(data) {
-    //         console.log(data);
-    //         displayCity(data, user);
-    //       });
-    //     } else {
-    //       alert('Error: City Not Found');
-    //     }
-    //   })
-    //   .catch(function(error) {
-    //     alert("Unable to get weather.");
-    // });
+        if (response.ok) {
+          response.json().then(function(data) {
+            console.log(data);
+            // displayCity(data, user);
+          });
+        } else {
+          alert('Error: City Not Found');
+        }
+      })
+      .catch(function(error) {
+        alert("Unable to get weather.");
+    });
 };
   
 
@@ -105,4 +108,4 @@ cityFormEl.addEventListener("submit", formSubmitHandler);
 
 // cityButtonsEl.addEventListener("click", buttonClickHandler);
 
-loadButtons()
+loadButtons();
