@@ -80,7 +80,6 @@ var displayWeather = function (weather, city) {
   }
   ;
 
-  
   var citySearched = $("#city-search-term")
   citySearched.text(city + " (" + weather.list[0].dt_txt.split(" ")[0] + ") ");
   citySearched.append(icon(0));
@@ -95,8 +94,17 @@ var displayWeather = function (weather, city) {
   todaysWeather.append(todaysTemp).append(todaysWind).append(todaysHumidity).append(uvIndex);
 
   // 5 day forcast
-  var forcast = ("forcast-weather");
-  var forcastIcon = icon
+  var forcast = $("#forcast-weather");
+    for (var i = 1; i < 5; i++) {
+      var listEl = $("p").addClass("col");
+      var date = weather.list[i].dt_txt.split(" ")[0];
+      var forcastIcon = icon(i).append("<br>");
+      var forcastWind = $("<li>").text("Wind: " + weather.list[i].wind.speed + " MPH").append("<br>");
+      var forcastTemp = $("<li>").text("Temp: " + degreeF(weather.list[i].main.temp).toPrecision(2) + "\u00b0 F").append("<br>");
+      listEl.append(date).append(forcastIcon).append(forcastWind).append(forcastTemp)
+      forcast.append(listEl)
+    }
+  
 
 
 }
