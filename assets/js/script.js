@@ -63,27 +63,39 @@ var createButton = function (cityObj) {
     saveButtons();
 }
 
-var displayWeather = function (weather, city) {
-  console.log(weather)
-  console.log(weather.list[0].weather[0].icon);
-  console.log(city);
-  
-  
-  // if (weather.length === 0) {
+ // if (weather.length === 0) {
   //   todaycontainer.textContent = "City not found.";
   //   return;
   // }
+
+var displayWeather = function (weather, city) {
+  console.log(weather)
+  console.log(city);
+
+  var degreeF = function(K) {
+    return (K - 273.15)*(9/5)+32;
+  } 
   iconUrl = "http://openweathermap.org/img/wn/" + weather.list[0].weather[0].icon + ".png";
   icon = $("<img>").attr("src", iconUrl);
   
-  var city = $("#city-search-term")
-  city.text(city + " (" + weather.list[0].dt_txt.split(" ")[0] + ") ");
-  city.append(icon);
+  var citySearched = $("#city-search-term")
+  citySearched.text(city + " (" + weather.list[0].dt_txt.split(" ")[0] + ") ");
+  citySearched.append(icon);
 
-  var today = $("#today-weather-container");
-  var todaysWeather = $("<ul>")
-  var todaysTemp = $("<li>").
-  
+  // today's forcast
+  var todaysWeather = $("#today-weather-container");
+  var todaysTemp = $("<p>").text("Temp: " + degreeF(weather.list[0].main.temp).toPrecision(2) + "\u00b0 F");
+  var todaysWind = $("<p>").text("Wind: " + weather.list[0].wind.speed + " MPH");
+  var uvValue = $("<span>").css("background-color", "green").text("0.47");
+  var todaysHumidity = $("<p>").text("Humidity: " + weather.list[0].main.humidity + "%");
+  var uvIndex = $("<p>").text("UV Index: ").append(uvValue);
+  todaysWeather.append(todaysTemp).append(todaysWind).append(todaysHumidity).append(uvIndex);
+
+  // 5 day forcast
+  var forcast = ("forcast-weather");
+  var forcastIcon = "http://openweathermap.org/img/wn/" + weather.list[1].weather[0].icon + ".png";
+
+
 }
 
 var getWeather = function(city) {
