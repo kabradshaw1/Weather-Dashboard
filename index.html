@@ -26,30 +26,37 @@
                         <h3 class="row">Search for a City</h3>
                         <form id="city-form" class="row">
                             <label class="form-label" for="cityname"></label>
-                            <input name="cityname" id="cityname" type="text" autofocus="true" class=""/>
+                            <input name="cityname" id="cityname" type="text" autofocus="true" class="mb-1"/>
                             <!-- This button should be expanded to fill in area below search box -->
-                            <button type="submit", class="btn btn-primary">Search</button>
+                            <button type="submit", class="btn btn-primary mb-1">Search</button>
                         </form>
                     </div>
                     <!-- This will hold the grey buttons that will hold privous seaches that 
                     can by searched again by clicking the button. -->
                     <div class="row" id="history-buttons">
-                        <!-- example button -->
-                        <button type="submit", class="btn btn-secondary">example button</button>
+                    
                     </div>               
             </div>
             
-            <div class="col-8">
-                <!-- place holder city -->
-                <h2 class="subtitle">Example City <span id="city-search-term"></span></h2>
+            <div class="col-8">           
                 <!-- This will hold the city serach -->
-                <div id="weather-container" class="list-group">
-                    
+                <div id="today-weather-container" class="list-group"> 
+                    <h2 class="subtitle" id="city-search-term"></h2>
+                    <p id="td-temp">Temp</p>
+                    <p id="td-wind">Wind</p>
+                    <p id="td-humidity">humidity</p>
+                    <p id="td-uv">UV Index</p>
                 </div>
                 <!-- this will hold the 5 day forcast -->
                 <div class="row">
                     <!-- place holders for days in 5 day forcast -->
-                    <div class="col">day 1</div>
+                    <div class="col">
+                        day 1 date <br>
+                        icon <br>
+                        wind <br>
+                        Temp <br>
+                        Humidity 
+                    </div>
                     <div class="col">day 2</div>
                     <div class="col">day 3</div>
                     <div class="col">day 4</div>
