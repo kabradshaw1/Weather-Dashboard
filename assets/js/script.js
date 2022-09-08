@@ -75,12 +75,15 @@ var displayWeather = function (weather, city) {
   var degreeF = function(K) {
     return (K - 273.15)*(9/5)+32;
   } 
-  iconUrl = "http://openweathermap.org/img/wn/" + weather.list[0].weather[0].icon + ".png";
-  icon = $("<img>").attr("src", iconUrl);
+  var icon = function(day) {
+    return $("<img>").attr("src", "http://openweathermap.org/img/wn/" + weather.list[day].weather[day].icon + ".png");
+  }
+  ;
+
   
   var citySearched = $("#city-search-term")
   citySearched.text(city + " (" + weather.list[0].dt_txt.split(" ")[0] + ") ");
-  citySearched.append(icon);
+  citySearched.append(icon(0));
 
   // today's forcast
   var todaysWeather = $("#today-weather-container");
@@ -93,7 +96,7 @@ var displayWeather = function (weather, city) {
 
   // 5 day forcast
   var forcast = ("forcast-weather");
-  var forcastIcon = "http://openweathermap.org/img/wn/" + weather.list[1].weather[0].icon + ".png";
+  var forcastIcon = icon
 
 
 }
